@@ -118,5 +118,9 @@ SNSU_CodeHub/
 └── structure.txt
 ```
 
-## Contributing
+## Contributors
+1. Vince Comon
+2. Dirk Labiaga
+3. John Anthony Becera
+
 
