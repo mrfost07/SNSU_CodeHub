@@ -27,7 +27,15 @@
    OPENAI_API_KEY=your-openai-api-key
 
 5. Initialize Database
+   mkdir instance
    flask db init
+   flask db migrate -m "initial migration"
+   flask db upgrade
+# if error pg install ani 'flask db migrate -m "initial migration"' 'flask db upgrade':
+   open extension, install sqlite3 editor
+   open app/app.db, deleta nang number.1
+   re install:
+
    flask db migrate -m "initial migration"
    flask db upgrade
 
