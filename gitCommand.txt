@@ -1,0 +1,46 @@
+# Git Workflow for Collaborators
+
+# 1. Create Your Own Branch
+# Replace <your-branch-name> with a descriptive branch name for your feature or fix.
+git checkout -b <your-branch-name>
+
+# 2. Switch Between Branches
+# To switch to the main branch (or any other existing branch):
+git checkout main
+
+# 3. Update Your Branch with the Latest Changes
+# Before starting work, pull the latest changes from the remote main branch:
+git pull --rebase origin main
+
+# 4. Make Your Changes
+# Edit files as needed using your preferred editor.
+
+# 5. Stage Your Changes
+# To stage all modified files:
+git add .
+# Or stage specific files:
+# git add <filename>
+
+# 6. Commit Your Changes
+# Write a clear, descriptive commit message:
+git commit -m "Your descriptive commit message"
+
+# 7. Push Your Branch to the Remote Repository
+# The -u flag sets the upstream branch for future pushes.
+git push -u origin <your-branch-name>
+
+# 8. Create a Pull Request
+# Once your branch is pushed, create a pull request on GitHub (or your Git hosting service)
+# to merge your changes into the main branch.
+
+# 9. Merging Updates (Optional: If you have permission to merge)
+# After your pull request is approved, merge your branch into main:
+git checkout main
+git pull --rebase origin main    # Ensure main is up-to-date
+git merge <your-branch-name>
+git push
+
+# 10. Cleaning Up (Optional)
+# After merging, you can delete your local and remote feature branch if no longer needed:
+git branch -d <your-branch-name>
+git push origin --delete <your-branch-name>
