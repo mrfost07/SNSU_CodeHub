@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ path.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ path.title }}</h1>
+            <p class="lead">{{ path.description }}</p>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Path Details</h5>
+                    <p><strong>Programming Language:</strong> {{ path.programming_language }}</p>
+                    <p><strong>Difficulty Level:</strong> {{ path.difficulty_level }}</p>
+                </div>
+            </div>
+
+            <h2>Tutorials</h2>
+            {% for tutorial in path.tutorials %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tutorial.title }}</h5>
+                        <p class="card-text">{{ tutorial.content[:200] }}...</p>
+                        <p><small class="text-muted">Order: {{ tutorial.order }}</small></p>
+                    </div>
+                </div>
+            {% else %}
+                <p>No tutorials available for this learning path.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

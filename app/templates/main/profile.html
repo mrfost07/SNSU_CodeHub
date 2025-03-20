@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-circle fa-5x mb-3"></i>
+                    <h3>{{ user.username }}</h3>
+                    <p class="text-muted">{{ user.email }}</p>
+                    {% if user.github_username %}
+                        <a href="https://github.com/{{ user.github_username }}" target="_blank" class="btn btn-outline-dark">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Edit Profile</h4>
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="github_username" class="form-label">GitHub Username</label>
+                            <input type="text" class="form-control" id="github_username" name="github_username" 
+                                   value="{{ user.github_username or '' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="skills" class="form-label">Skills (comma-separated)</label>
+                            <input type="text" class="form-control" id="skills" name="skills" 
+                                   value="{{ user.skills or '' }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Your Activity</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="border rounded p-3 text-center">
+                                <h3>{{ user.projects.count() }}</h3>
+                                <p class="mb-0">Projects</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded p-3 text-center">
+                                <h3>0</h3>
+                                <p class="mb-0">Contributions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

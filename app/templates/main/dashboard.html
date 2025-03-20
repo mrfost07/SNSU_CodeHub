@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <h2>Your Projects</h2>
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.description }}</p>
+                            <a href="{{ url_for('projects.view', id=project.id) }}" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You haven't created any projects yet.</p>
+                <a href="{{ url_for('projects.create') }}" class="btn btn-primary">Create Project</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
