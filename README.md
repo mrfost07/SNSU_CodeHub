@@ -15,7 +15,7 @@ SNSU CodeHub is a collaborative platform designed for developers, students, and 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/SNSU_CodeHub.git
+git clone https://github.com/mrfost07/SNSU_CodeHub.git
 cd SNSU_CodeHub
 ```
 
@@ -33,8 +33,9 @@ pip install -r requirements.txt
 
 4. Initialize the database:
 ```bash
-flask db upgrade
-python init_db.py
+   flask db init
+   flask db migrate -m "initial migration"
+   flask db upgrade
 ```
 
 5. Run the development server:
@@ -43,4 +44,17 @@ flask run
 ```
 
 ## Project Structure
-
+SNSU_CodeHub/
+├── app/
+│   ├── main/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── auth/
+│   ├── projects/
+│   ├── learning/
+│   ├── __init__.py
+│   └── models.py
+├── venv/
+├── config.py
+├── run.py
+└── requirements.txt
