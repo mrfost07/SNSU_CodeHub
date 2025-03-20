@@ -44,4 +44,11 @@ flask run
 ```
 
 ## Project Structure
-![Project Structure](public/screenshots/structure.png)
+![Project Structure](./screenshots/structure.png)
+<!-- Alternative formats if above doesn't work: -->
+![Project Structure](./screenshots/structure.jpg)
+<!-- 
+Note: Make sure to:
+1. Create a 'screenshots' directory in your project root
+2. Add your structure image as 'structure.png' or 'structure.jpg' in the screenshots directory
+-->
