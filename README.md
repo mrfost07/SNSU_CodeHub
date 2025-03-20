@@ -50,5 +50,73 @@ flask run
 ![Homepage Preview](app/public/screenshots/homepage.png)
 
 ## Project Structure
-![Project Structure](app/public/screenshots/structure.png)
+```
+SNSU_CodeHub/
+├── app/
+│   ├── auth/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── learning/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── main/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── organizations/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── projects/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   ├── js/
+│   │   │   └── main.js
+│   │   └── public/
+│   │       └── screenshots/
+│   │           ├── homepage.png
+│   │           └── structure.png
+│   ├── templates/
+│   │   ├── auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   ├── learning/
+│   │   │   ├── add_resource.html
+│   │   │   ├── index.html
+│   │   │   ├── path.html
+│   │   │   └── resources.html
+│   │   ├── main/
+│   │   │   ├── about.html
+│   │   │   ├── dashboard.html
+│   │   │   ├── index.html
+│   │   │   ├── profile.html
+│   │   │   └── search.html
+│   │   ├── organizations/
+│   │   │   ├── index.html
+│   │   │   └── view.html
+│   │   ├── projects/
+│   │   │   ├── create.html
+│   │   │   ├── index.html
+│   │   │   └── view.html
+│   │   └── base.html
+│   ├── __init__.py
+│   ├── init_resources.py
+│   └── models.py
+├── instance/
+│   └── app.db
+├── migrations/
+├── .env
+├── .gitignore
+├── config.py
+├── gitCommand.txt
+├── init_db.py
+├── README.md
+├── requirements.txt
+├── run.py
+├── run_server.txt
+└── structure.txt
+```
+
+## Contributing
 
