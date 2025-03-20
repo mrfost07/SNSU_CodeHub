@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\fosta\OneDrive\Desktop\OOP\Project\SNSU_CodeHub\env
+set VIRTUAL_ENV=C:\Users\fosta\OneDrive\Desktop\OOP\Project\SNSU_CodeHub\SNSU_CodeHub\env
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -1,4 +1,4 @@
-#!C:\Users\fosta\OneDrive\Desktop\OOP\Project\SNSU_CodeHub\env\Scripts\python.exe
+#!C:\Users\fosta\OneDrive\Desktop\OOP\Project\SNSU_CodeHub\SNSU_CodeHub\env\Scripts\python.exe
 
 import sys
 import json
