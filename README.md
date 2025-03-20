@@ -44,4 +44,4 @@ flask run
 ```
 
 ## Project Structure
-![Project Structure](public/screenshots/structure.img)
+![Project Structure](./public/screenshots/structure.img)
