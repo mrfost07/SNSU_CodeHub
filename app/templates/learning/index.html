@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Paths{% endblock %}
+
+{% block content %}
+    <h1>Learning Paths</h1>
+    
+    <div class="row mt-4">
+        {% for path in paths %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ path.title }}</h5>
+                        <p class="card-text">{{ path.description[:150] }}...</p>
+                        <p><small class="text-muted">Language: {{ path.programming_language }}</small></p>
+                        <p><small class="text-muted">Level: {{ path.difficulty_level }}</small></p>
+                        <a href="{{ url_for('learning.view_path', path_id=path.id) }}" class="btn btn-primary">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col">
+                <p>No learning paths available.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

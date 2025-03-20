@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ project.title }}</h1>
+            <p class="lead">{{ project.description }}</p>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Project Details</h5>
+                    <p><strong>Category:</strong> {{ project.category }}</p>
+                    <p><strong>Tags:</strong> {{ project.tags }}</p>
+                    {% if project.github_repo %}
+                        <p><strong>GitHub:</strong> <a href="{{ project.github_repo }}" target="_blank">{{ project.github_repo }}</a></p>
+                    {% endif %}
+                    <p><strong>Created:</strong> {{ project.created_at.strftime('%Y-%m-%d') }}</p>
+                    <p><strong>Author:</strong> {{ project.author.username }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

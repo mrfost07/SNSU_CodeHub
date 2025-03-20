@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Resources{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="mb-0">Learning Resources</h1>
+            <p class="text-muted">Browse our curated collection of learning materials</p>
+        </div>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('learning.add_resource') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add Resource
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="mb-4">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary active" data-filter="all">All</button>
+            <button type="button" class="btn btn-outline-primary" data-filter="video">Videos</button>
+            <button type="button" class="btn btn-outline-primary" data-filter="tutorial">Tutorials</button>
+            <button type="button" class="btn btn-outline-primary" data-filter="course">Courses</button>
+            <button type="button" class="btn btn-outline-primary" data-filter="documentation">Documentation</button>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for resource in resources %}
+        <div class="col-md-6 col-lg-4 resource-item" data-type="{{ resource.resource_type }}">
+            <div class="card h-100 glass-card">
+                {% if resource.thumbnail_url %}
+                <img src="{{ resource.thumbnail_url }}" class="card-img-top" alt="{{ resource.title }}" 
+                     style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ resource.title }}</h5>
+                    <p class="card-text">{{ resource.description[:150] }}...</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary">{{ resource.programming_language }}</span>
+                        <span class="badge bg-secondary">{{ resource.resource_type }}</span>
+                        <span class="badge bg-info">{{ resource.difficulty_level }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ resource.url }}" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> View Resource
+                        </a>
+                        <a href="{{ url_for('learning.view_resource', id=resource.id) }}" 
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Added {{ resource.created_at.strftime('%Y-%m-%d') }}</small>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No learning resources available yet.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Add this JavaScript to handle filtering -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Update active button state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter resources
+            const resources = document.querySelectorAll('.resource-item');
+            resources.forEach(resource => {
+                if (filterValue === 'all' || resource.getAttribute('data-type') === filterValue) {
+                    resource.style.display = 'block';
+                } else {
+                    resource.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

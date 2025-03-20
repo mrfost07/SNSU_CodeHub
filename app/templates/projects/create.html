@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Create Project{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Create New Project</h1>
+            <form method="POST" action="{{ url_for('projects.create') }}">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Project Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="category" name="category" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tags" class="form-label">Tags (comma-separated)</label>
+                    <input type="text" class="form-control" id="tags" name="tags">
+                </div>
+                <div class="mb-3">
+                    <label for="github_repo" class="form-label">GitHub Repository URL</label>
+                    <input type="url" class="form-control" id="github_repo" name="github_repo">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Project</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

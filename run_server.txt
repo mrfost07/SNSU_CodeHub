@@ -1,0 +1,83 @@
+=== SNSU CodeHub Local Development Setup Guide ===
+
+1. Clone the Repository
+   git clone [repository-url]
+   cd SNSU_CodeHub
+
+2. Create and Activate Virtual Environment
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
+   
+   # macOS/Linux
+   python3 -m venv venv
+   source venv/bin/activate
+
+3. Install Dependencies
+   pip install -r requirements.txt
+
+4. Set Up Environment Variables
+   # Create .env file in the root directory and add:
+   FLASK_APP=run.py
+   FLASK_ENV=development
+   SECRET_KEY=your-secure-secret-key
+   DATABASE_URL=sqlite:///app.db
+   GITHUB_CLIENT_ID=your-github-client-id
+   GITHUB_CLIENT_SECRET=your-github-client-secret
+   OPENAI_API_KEY=your-openai-api-key
+
+5. Initialize Database
+   flask db init
+   flask db migrate -m "initial migration"
+   flask db upgrade
+
+6. Run the Development Server
+   flask run
+
+The application should now be running at http://localhost:5000
+
+=== Troubleshooting ===
+
+If you encounter "No module found" errors:
+- Make sure your virtual environment is activated
+- Try running: pip install -r requirements.txt again
+
+If database errors occur:
+- Delete the migrations folder and app.db
+- Run the database initialization commands again
+
+For Windows PowerShell execution policy issues:
+- Run PowerShell as administrator
+- Set-ExecutionPolicy RemoteSigned
+- Select 'Y' when prompted
+
+=== Development Workflow ===
+
+1. Always activate the virtual environment before working
+2. Pull latest changes: git pull origin main
+3. Install any new dependencies: pip install -r requirements.txt
+4. Apply any new migrations: flask db upgrade
+5. Make your changes
+6. Run tests if available: python -m pytest
+7. Commit and push your changes
+
+=== Project Structure ===
+
+/SNSU_CodeHub
+├── app/                    # Application package
+│   ├── auth/              # Authentication blueprint
+│   ├── main/              # Main routes blueprint
+│   ├── projects/          # Projects blueprint
+│   ├── learning/          # Learning blueprint
+│   ├── templates/         # HTML templates
+│   └── models.py          # Database models
+├── migrations/            # Database migrations
+├── venv/                  # Virtual environment
+├── config.py             # Configuration file
+├── requirements.txt      # Project dependencies
+└── run.py               # Application entry point
+
+=== Contact ===
+
+For any issues or questions, please contact:
+[Your Contact Information]

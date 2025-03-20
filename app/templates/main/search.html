@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Search Results for "{{ query }}"</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h2>Projects <span class="badge bg-primary">{{ projects|length }}</span></h2>
+            {% for project in projects %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description[:150] }}...</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">By {{ project.author.username }}</small>
+                            <a href="{{ url_for('projects.view', id=project.id) }}" class="btn btn-sm btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>No matching projects found.</p>
+            {% endfor %}
+        </div>
+        
+        <div class="col-md-6">
+            <h2>Learning Paths <span class="badge bg-primary">{{ learning_paths|length }}</span></h2>
+            {% for path in learning_paths %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ path.title }}</h5>
+                        <p class="card-text">{{ path.description[:150] }}...</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{ path.programming_language }}</small>
+                            <a href="{{ url_for('learning.view_path', path_id=path.id) }}" class="btn btn-sm btn-primary">View Path</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>No matching learning paths found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
