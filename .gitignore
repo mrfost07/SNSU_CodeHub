@@ -1,19 +1,27 @@
+# Python virtual environments
+env/
+.env/
 venv/
+.venv/
+
+# Python cache files
 __pycache__/
 *.pyc
-.env
+
+# Database & migrations
+migrations/
 instance/
+
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Build files
 dist/
 build/
 *.egg-info/
+
+# OS specific
 .DS_Store
-
-env/
-venv/
-
-migration/
-instance/
 
