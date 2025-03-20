@@ -44,3 +44,17 @@ git push
 # After merging, you can delete your local and remote feature branch if no longer needed:
 git branch -d <your-branch-name>
 git push origin --delete <your-branch-name>
+
+
+# common/usually gamiton is:
+
+1. everytime mg change kas file or revise:
+    git status # e track ani ang tanan na modify na kylangan pa e commit
+    git add <folder name> or
+    git add . # para tanan ma add bisan isa ra ge change kana rkan gamita
+
+    git commit -m "message nimo dri unsa asa imuh ge change"
+
+    git push origin branch_name
+
+tapos if mg pull ka adto rkas repo mg create pull or new pull, compare imung branch to main, nya e approve kora
