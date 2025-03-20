@@ -44,17 +44,4 @@ flask run
 ```
 
 ## Project Structure
-SNSU_CodeHub/
-├── app/
-│   ├── main/
-│   │   ├── __init__.py
-│   │   └── routes.py
-│   ├── auth/
-│   ├── projects/
-│   ├── learning/
-│   ├── __init__.py
-│   └── models.py
-├── venv/
-├── config.py
-├── run.py
-└── requirements.txt
+![Project Structure](app/public/screenshot/structure.img)
