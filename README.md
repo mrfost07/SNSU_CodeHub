@@ -1,6 +1,6 @@
 # SNSU CodeHub
 
-SNSU CodeHub is a collaborative platform designed for developers, students, and coding enthusiasts from Sakon Nakhon Rajabhat University. The platform provides learning resources, project collaboration tools, and a community space for coding education.
+SNSU CodeHub is a collaborative platform designed for developers, students, and coding enthusiasts from Surigao del Norte State University. The platform provides learning resources, project collaboration tools, and a community space for coding education.
 
 ## Features
 
