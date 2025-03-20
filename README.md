@@ -46,6 +46,9 @@ pip install -r requirements.txt
 flask run
 ```
 
+## Homepage Preview
+![Homepage Preview](app/public/screenshots/homepage.png)
+
 ## Project Structure
 ![Project Structure](app/public/screenshots/structure.png)
 
