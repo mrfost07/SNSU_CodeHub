@@ -30,11 +30,13 @@ def create_app():
         from app.projects import bp as projects_bp
         from app.learning import bp as learning_bp
         from app.organizations import bp as organizations_bp
+        from app.community import bp as community_bp  # Add this line
 
         app.register_blueprint(auth_bp)
         app.register_blueprint(main_bp)
         app.register_blueprint(projects_bp)
         app.register_blueprint(learning_bp)
         app.register_blueprint(organizations_bp)
+        app.register_blueprint(community_bp)  # Add this line
 
     return app

@@ -12,6 +12,23 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #3498db;
+            --dark-primary: #27ae60;
+            --dark-secondary: #2980b9;
+            --background: #f8f9fa;
+            --text-color: #2c3e50;
+            --primary-green: #27ae60;
+            --secondary-green: #2ecc71;
+            --dark-green: #145a32;
+            --light-green: #82e0aa;
+            --nav-gradient: linear-gradient(135deg, #27ae60, #145a32);
+            --footer-gradient: linear-gradient(135deg, #145a32, #27ae60);
+            --nav-bg: #27ae60;
+            --nav-gradient: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
         html, body {
             height: 100%;
         }
@@ -19,6 +36,9 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-color);
         }
         main {
             flex: 1 0 auto;
@@ -30,6 +50,253 @@
         .nav-link.active { font-weight: bold; }
         .dark-mode { background-color: #212529; color: #fff; }
         .search-form { max-width: 300px; }
+        .navbar {
+            background: var(--nav-gradient) !important;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(39, 174, 96, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white !important;
+        }
+
+        .navbar-brand .brand-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+            margin: 0 5px;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .search-form input {
+            border-radius: 20px;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .search-form input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .search-form .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 20px 0 0 20px;
+            padding: 10px 20px;
+        }
+
+        .search-form .btn-search {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 0 20px 20px 0;
+            padding: 10px 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(46,204,113,0.2);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            border: none;
+        }
+
+        footer {
+            background: var(--footer-gradient);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary-green), var(--dark-green));
+        }
+
+        .footer-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 5px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .user-menu {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 5px 15px !important;
+        }
+
+        .user-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .newsletter-form input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 20px 0 0 20px;
+            padding: 10px 20px;
+        }
+
+        .newsletter-form button {
+            background: var(--secondary-green);
+            border: none;
+            border-radius: 0 20px 20px 0;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary-color);
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 0;
+            }
+            
+            .search-form {
+                width: 100%;
+                margin: 1rem 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -66,10 +333,13 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark glass-nav sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                <i class="fas fa-code"></i> SNSU CodeHub
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-code brand-icon me-2"></i>
+                    <span>SNSU CodeHub</span>
+                </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
@@ -77,44 +347,69 @@
             
             <div class="collapse navbar-collapse" id="navbarContent">
                 <form class="d-flex search-form mx-auto" action="{{ url_for('main.search') }}" method="GET">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Search projects, tutorials...">
-                    <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                    <div class="input-group">
+                        <input class="form-control nav-search" type="search" name="q" placeholder="Search projects, tutorials...">
+                        <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                 </form>
                 
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('community.index') }}">
+                            <i class="fas fa-users"></i> Community
+                            <span class="nav-indicator"></span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('projects.index') }}">
                             <i class="fas fa-project-diagram"></i> Projects
+                            <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('learning.index') }}">
                             <i class="fas fa-graduation-cap"></i> Learning
+                            <span class="nav-indicator"></span>
                         </a>
                     </li>
                     {% if current_user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i> {{ current_user.username }}
+                            <a class="nav-link dropdown-toggle user-menu" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                <img src="{{ url_for('static', filename='img/default-avatar.png') }}" class="rounded-circle me-1" width="32" height="32">
+                                <span>{{ current_user.username }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{ url_for('main.profile') }}">Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.profile') }}">
+                                    <i class="fas fa-user me-2"></i> Profile
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </a></li>
                             </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                            <a class="nav-link btn btn-outline-light me-2" href="{{ url_for('auth.login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                            <a class="nav-link btn btn-light text-dark" href="{{ url_for('auth.register') }}">Register</a>
                         </li>
                     {% endif %}
                     <li class="nav-item">
                         <button class="btn btn-link nav-link" id="darkModeToggle">
                             <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link nav-link position-relative" id="notificationsBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                3
+                            </span>
                         </button>
                     </li>
                 </ul>
@@ -140,21 +435,57 @@
         </div>
     </main>
 
-    <footer class="bg-dark text-light py-2 mt-3">
+    <footer class="footer mt-auto">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row g-4">
                 <div class="col-md-4">
-                    <span class="me-3">© {{ current_year }} SNSU CodeHub</span>
+                    <h5 class="mb-3 fw-bold">SNSU CodeHub</h5>
+                    <p class="mb-3 text-light-50">Empowering students through collaborative coding and learning.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord fa-lg"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <a href="{{ url_for('main.about') }}" class="text-light me-3">About</a>
-                    <a href="{{ url_for('projects.index') }}" class="text-light me-3">Projects</a>
-                    <a href="{{ url_for('learning.index') }}" class="text-light">Learning</a>
+                <div class="col-md-2">
+                    <h6 class="text-white mb-3">Quick Links</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('projects.index') }}">Projects</a></li>
+                        <li><a href="{{ url_for('learning.index') }}">Learning</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a></li>
+                    </ul>
                 </div>
-                <div class="col-md-4 text-md-end">
-                    <a href="#" class="text-light me-3" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" class="text-light me-3" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-light" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <div class="col-md-3">
+                    <h6 class="text-white mb-3">Resources</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-white mb-3">Newsletter</h6>
+                    <p class="text-light-50 mb-3">Stay updated with our latest features and news.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-light" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4 border-light opacity-25">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-light-50">© {{ current_year }} SNSU CodeHub. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-light-50 me-3 text-decoration-none">Privacy Policy</a>
+                    <a href="#" class="text-light-50 me-3 text-decoration-none">Terms of Service</a>
+                    <a href="#" class="text-light-50 text-decoration-none">Cookie Policy</a>
                 </div>
             </div>
         </div>
@@ -249,6 +580,54 @@
         // Show welcome toast
         document.addEventListener('DOMContentLoaded', () => {
             showToast('Welcome to SNSU CodeHub!', 'info');
+        });
+
+        // Add these new interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll with progress indicator
+            let progress = document.createElement('div');
+            progress.style.position = 'fixed';
+            progress.style.top = '0';
+            progress.style.left = '0';
+            progress.style.height = '3px';
+            progress.style.background = var(--primary-color);
+            progress.style.transition = 'width 0.1s';
+            progress.style.zIndex = '1000';
+            document.body.appendChild(progress);
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progress.style.width = scrolled + '%';
+            });
+
+            // Enhanced toast notifications
+            window.showToast = function(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `toast show align-items-center text-white bg-${type}`;
+                toast.setAttribute('role', 'alert');
+                toast.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                `;
+                document.querySelector('.toast-container').appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+            };
+
+            // Add hover effect to cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
         });
         
     </script>

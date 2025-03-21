@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Discussions{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">Community Discussions</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Start a Discussion</h5>
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Discussion Title">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Discussion</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="list-group">
+        <div class="list-group-item">
+            <h5 class="mb-1">Sample Discussion Topic</h5>
+            <p class="mb-1">This is a placeholder discussion to show the layout.</p>
+            <small class="text-muted">Posted by Admin • 2 days ago</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

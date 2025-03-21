@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Community Members{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">Community Members</h1>
+    
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ url_for('static', filename='img/default-avatar.png') }}" 
+                         class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+                    <h5 class="card-title">Sample User</h5>
+                    <p class="card-text text-muted">BSIT Student</p>
+                    <button class="btn btn-sm btn-primary">Connect</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
