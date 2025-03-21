@@ -1,7 +1,10 @@
+import os
 from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+
+UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app/static/uploads')
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -90,7 +93,9 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    comments = db.relationship('Comment', backref='organization_post', lazy='dynamic', 
+                             primaryjoin="Comment.organization_post_id == Post.id",
+                             cascade='all, delete-orphan')
     likes = db.relationship('User', secondary='post_likes', backref='liked_posts')
 
 class Comment(db.Model):
@@ -98,8 +103,60 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('community_post.id'))
+    organization_post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
+class CommunityPost(db.Model):
+    __tablename__ = 'community_post'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=True)  # Made nullable to allow media-only posts
+    content_type = db.Column(db.String(20), default='text')  # text, image, video
+    media_url = db.Column(db.String(500))  # URL for image/video content
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
+    
+    # Relationships
+    author = db.relationship('User', backref='community_posts')
+    likes = db.relationship('User', secondary='community_post_likes', backref='liked_community_posts')
+    comments = db.relationship('Comment', backref='community_post', lazy='dynamic', 
+                             primaryjoin="Comment.post_id == CommunityPost.id",
+                             cascade='all, delete-orphan')
+    shares = db.relationship('Share', backref='post', lazy='dynamic')
+
+class Group(db.Model):
+    __tablename__ = 'group'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+    # Relationships
+    created_by = db.relationship('User', backref='created_groups')
+    members = db.relationship('User', secondary='group_members', backref='joined_groups')
+    posts = db.relationship('CommunityPost', backref='group', lazy='dynamic')
+
+# Association table for group members
+group_members = db.Table('group_members',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('group_id', db.Integer, db.ForeignKey('group.id'), primary_key=True),
+    db.Column('joined_at', db.DateTime, default=datetime.utcnow)
+)
+
+class Share(db.Model):
+    __tablename__ = 'share'
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('community_post.id'))
+
+# Association tables
+community_post_likes = db.Table('community_post_likes',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('post_id', db.Integer, db.ForeignKey('community_post.id'))
+)
 
 # Association table for post likes
 post_likes = db.Table('post_likes',

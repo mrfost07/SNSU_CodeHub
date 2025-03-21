@@ -74,26 +74,33 @@ function updateDarkModeButton(isDark) {
     }
 }
 
-// Toast notification system
-const showToast = (message, type = 'info') => {
+// Enhanced Toast Notifications
+function showToast(message, type = 'info') {
     const toastContainer = document.querySelector('.toast-container');
     const toast = document.createElement('div');
-    toast.className = `toast show animate__animated animate__fadeIn bg-${type}`;
+    toast.className = `toast show align-items-center text-white bg-${type}`;
+    toast.setAttribute('role', 'alert');
     toast.innerHTML = `
-        <div class="toast-header">
-            <strong class="me-auto">${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-        </div>
-        <div class="toast-body text-white">
-            ${message}
+        <div class="d-flex">
+            <div class="toast-body">
+                ${message}
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                 type === 'error' ? 'exclamation-circle' : 
+                                 'info-circle'} ms-2"></i>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" 
+                    data-bs-dismiss="toast"></button>
         </div>
     `;
+    
     toastContainer.appendChild(toast);
+    toast.style.transform = 'translateY(0)';
+    
     setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 500);
+        toast.style.transform = 'translateY(100%)';
+        setTimeout(() => toast.remove(), 300);
     }, 3000);
-};
+}
 
 // Progress bar
 const progressBar = document.createElement('div');
@@ -141,9 +148,9 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Image lazy loading
-document.addEventListener('DOMContentLoaded', () => {
-    const lazyImages = document.querySelectorAll('img[data-src]');
+// Lazy Loading Images
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -154,8 +161,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    lazyImages.forEach(img => imageObserver.observe(img));
+
+    images.forEach(img => imageObserver.observe(img));
 });
+
+// Enhanced Comment System
+function initializeCommentSystem() {
+    const commentForms = document.querySelectorAll('.comment-form');
+    
+    commentForms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                appendComment(data.comment);
+                form.reset();
+                showToast('Comment added successfully!', 'success');
+            } else {
+                showToast('Error adding comment', 'error');
+            }
+        });
+    });
+}
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -168,5 +201,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation classes
     document.querySelectorAll('.card').forEach(card => {
         card.classList.add('animate-fade-in');
+    });
+
+    initializeCommentSystem();
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+});
+
+// Theme Toggle with Animation
+const themeToggle = document.getElementById('darkModeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.documentElement.setAttribute('data-theme-switching', 'true');
+        setTimeout(() => {
+            toggleDarkMode();
+            document.documentElement.removeAttribute('data-theme-switching');
+        }, 300);
+    });
+}
+
+// Smooth Scroll Implementation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 });
