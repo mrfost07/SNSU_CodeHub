@@ -3,11 +3,20 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-    <h1>Welcome, {{ current_user.username }}!</h1>
-    
-    <div class="row mt-4">
+<div class="container py-4">
+    <div class="d-flex align-items-center mb-4 gap-3">
+        <img src="{{ current_user.profile_image }}" 
+             class="rounded-circle shadow-sm" 
+             style="width: 64px; height: 64px; object-fit: cover;">
+        <div>
+            <h2 class="mb-0">Welcome, {{ current_user.username }}!</h2>
+            <small class="text-muted">{{ current_user.email }}</small>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-8">
-            <h2>Your Projects</h2>
+            <h3>Your Projects</h3>
             {% if projects %}
                 {% for project in projects %}
                     <div class="card mb-3">
@@ -24,4 +33,5 @@
             {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}

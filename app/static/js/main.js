@@ -167,23 +167,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Enhanced Comment System
 function initializeCommentSystem() {
-    const commentForms = document.querySelectorAll('.comment-form');
-    
-    commentForms.forEach(form => {
+    document.querySelectorAll('.comment-form').forEach(form => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData
-            });
             
-            if (response.ok) {
-                const data = await response.json();
-                appendComment(data.comment);
-                form.reset();
-                showToast('Comment added successfully!', 'success');
-            } else {
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const commentsList = form.closest('.comment-wrapper').querySelector('.comments-list');
+                    const commentHtml = `
+                        <div class="comment-item d-flex gap-2 mb-2 animate__animated animate__fadeIn">
+                            <img src="${data.comment.author_image}" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;">
+                            <div class="bg-light rounded p-2 flex-grow-1">
+                                <div class="d-flex justify-content-between">
+                                    <small class="fw-bold">${data.comment.author}</small>
+                                    <small class="text-muted">${data.comment.created_at}</small>
+                                </div>
+                                <p class="mb-0">${data.comment.content}</p>
+                            </div>
+                        </div>`;
+                    
+                    commentsList.insertAdjacentHTML('beforeend', commentHtml);
+                    form.reset();
+                    showToast('Comment added successfully!', 'success');
+                } else {
+                    showToast('Error adding comment', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
                 showToast('Error adding comment', 'error');
             }
         });
