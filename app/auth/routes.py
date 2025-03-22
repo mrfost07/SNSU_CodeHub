@@ -23,13 +23,35 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     if request.method == 'POST':
-        user = User(username=request.form['username'], 
-                   email=request.form['email'])
-        user.set_password(request.form['password'])
-        db.session.add(user)
-        db.session.commit()
-        flash('Registration successful! Please login to continue.', 'success')
-        return redirect(url_for('auth.login'))
+        try:
+            # Check if username or email already exists
+            if User.query.filter_by(username=request.form['username']).first():
+                flash('Username already exists. Please choose another one.', 'danger')
+                return redirect(url_for('auth.register'))
+            
+            if User.query.filter_by(email=request.form['email']).first():
+                flash('Email already registered. Please use another email.', 'danger')
+                return redirect(url_for('auth.register'))
+            
+            # Create new user
+            user = User(
+                username=request.form['username'],
+                email=request.form['email']
+            )
+            user.set_password(request.form['password'])
+            
+            # Add and commit to database
+            db.session.add(user)
+            db.session.commit()
+            
+            flash('Registration successful! Please login with your credentials.', 'success')
+            return redirect(url_for('auth.login'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash('Error during registration. Please try again.', 'danger')
+            return redirect(url_for('auth.register'))
+            
     return render_template('auth/register.html')
 
 @bp.route('/logout')

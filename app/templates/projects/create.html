@@ -3,32 +3,180 @@
 {% block title %}Create Project{% endblock %}
 
 {% block content %}
+<div class="container py-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1>Create New Project</h1>
-            <form method="POST" action="{{ url_for('projects.create') }}">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Project Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-4">Create New Project</h1>
+                    <form method="POST" action="{{ url_for('projects.create') }}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Project Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="">Select a category</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile Development">Mobile Development</option>
+                                <option value="Desktop Application">Desktop Application</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="IoT">IoT</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="project_image" class="form-label">Project Image</label>
+                            <input type="file" class="form-control" id="project_image" name="project_image" 
+                                   accept="image/*" onchange="previewImage(this)">
+                            <div id="imagePreview" class="mt-2"></div>
+                            <small class="text-muted">Recommended size: 800x400 pixels</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tech_stack" class="form-label">Tech Stack</label>
+                            <select class="form-select" id="tech_stack" name="tech_stack" multiple required>
+                                <optgroup label="Frontend">
+                                    <option value="HTML5">HTML5</option>
+                                    <option value="CSS3">CSS3</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="TypeScript">TypeScript</option>
+                                    <option value="React">React</option>
+                                    <option value="Vue.js">Vue.js</option>
+                                    <option value="Angular">Angular</option>
+                                    <option value="Svelte">Svelte</option>
+                                    <option value="Bootstrap">Bootstrap</option>
+                                    <option value="Tailwind">Tailwind CSS</option>
+                                    <option value="SASS">SASS/SCSS</option>
+                                    <option value="jQuery">jQuery</option>
+                                </optgroup>
+                                <optgroup label="Backend">
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                    <option value="Node.js">Node.js</option>
+                                    <option value="PHP">PHP</option>
+                                    <option value="Ruby">Ruby</option>
+                                    <option value="C#">C#</option>
+                                    <option value="Go">Go</option>
+                                    <option value="Rust">Rust</option>
+                                    <option value="Django">Django</option>
+                                    <option value="Flask">Flask</option>
+                                    <option value="Express.js">Express.js</option>
+                                    <option value="Laravel">Laravel</option>
+                                    <option value="Spring">Spring Boot</option>
+                                    <option value="ASP.NET">ASP.NET Core</option>
+                                </optgroup>
+                                <optgroup label="Database">
+                                    <option value="MySQL">MySQL</option>
+                                    <option value="PostgreSQL">PostgreSQL</option>
+                                    <option value="MongoDB">MongoDB</option>
+                                    <option value="SQLite">SQLite</option>
+                                    <option value="Redis">Redis</option>
+                                    <option value="Firebase">Firebase</option>
+                                    <option value="Supabase">Supabase</option>
+                                    <option value="Oracle">Oracle</option>
+                                    <option value="MS SQL">Microsoft SQL Server</option>
+                                </optgroup>
+                                <optgroup label="DevOps & Cloud">
+                                    <option value="Docker">Docker</option>
+                                    <option value="Kubernetes">Kubernetes</option>
+                                    <option value="AWS">AWS</option>
+                                    <option value="Azure">Azure</option>
+                                    <option value="GCP">Google Cloud</option>
+                                    <option value="Heroku">Heroku</option>
+                                    <option value="Vercel">Vercel</option>
+                                    <option value="Netlify">Netlify</option>
+                                    <option value="Jenkins">Jenkins</option>
+                                    <option value="GitHub Actions">GitHub Actions</option>
+                                </optgroup>
+                                <optgroup label="Mobile Development">
+                                    <option value="React Native">React Native</option>
+                                    <option value="Flutter">Flutter</option>
+                                    <option value="Android">Android (Native)</option>
+                                    <option value="iOS">iOS (Native)</option>
+                                    <option value="Kotlin">Kotlin</option>
+                                    <option value="Swift">Swift</option>
+                                    <option value="Xamarin">Xamarin</option>
+                                </optgroup>
+                                <optgroup label="Tools & Others">
+                                    <option value="Git">Git</option>
+                                    <option value="VS Code">VS Code</option>
+                                    <option value="WebPack">Webpack</option>
+                                    <option value="Vite">Vite</option>
+                                    <option value="NPM">NPM</option>
+                                    <option value="Yarn">Yarn</option>
+                                    <option value="GraphQL">GraphQL</option>
+                                    <option value="REST">REST API</option>
+                                </optgroup>
+                            </select>
+                            <small class="text-muted">Hold Ctrl/Cmd to select multiple technologies</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="github_url" class="form-label">GitHub Repository URL</label>
+                            <input type="url" class="form-control" id="github_url" name="github_url" 
+                                   placeholder="https://github.com/username/repository">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="preview_url" class="form-label">Live Preview URL</label>
+                            <input type="url" class="form-control" id="preview_url" name="preview_url" 
+                                   placeholder="https://your-project-demo.com">
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('projects.index') }}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Create Project</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="category" name="category" required>
-                </div>
-                <div class="mb-3">
-                    <label for="tags" class="form-label">Tags (comma-separated)</label>
-                    <input type="text" class="form-control" id="tags" name="tags">
-                </div>
-                <div class="mb-3">
-                    <label for="github_repo" class="form-label">GitHub Repository URL</label>
-                    <input type="url" class="form-control" id="github_repo" name="github_repo">
-                </div>
-                <button type="submit" class="btn btn-primary">Create Project</button>
-            </form>
+            </div>
         </div>
     </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Select2 with enhanced features
+    $('#tech_stack').select2({
+        placeholder: 'Select technologies used',
+        width: '100%',
+        allowClear: true,
+        closeOnSelect: false,
+        selectOnClose: false,
+        maximumSelectionLength: 10,
+        templateResult: function(data) {
+            if (!data.id) return data.text;
+            return $('<span>' + data.text + '</span>');
+        }
+    });
+
+    // Add preview image functionality
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imagePreview').html(`<img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;">`);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Initialize image preview
+    $('#project_image').on('change', function() {
+        previewImage(this);
+    });
+});
+</script>
 {% endblock %}

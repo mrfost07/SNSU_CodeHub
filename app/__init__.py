@@ -12,6 +12,7 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    Config.init_app(app)  # Add this line
 
     db.init_app(app)
     login_manager.init_app(app)
